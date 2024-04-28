@@ -1,7 +1,12 @@
+const queryString = window.location.href; // Get URL query string
+const urlParams = queryString.split("/");
+const roomName = urlParams[urlParams.length - 1];
+
 (function () {
   console.log("testing...........");
   const app = document.querySelector(".app");
   console.log(app);
+  console.log(roomName);
   const socket = io();
 
   let uname;
@@ -14,7 +19,7 @@
       if (username.length == 0) {
         return;
       }
-      socket.emit("newuser", username);
+      socket.emit("newuser", username, roomName);
       uname = username;
       app.querySelector(".join-screen").classList.remove("active");
       app.querySelector(".chat-screen").classList.add("active");
